@@ -1,0 +1,4 @@
+.idea/
+deploy/.vagrant
+src/vendor
+src/node_modules

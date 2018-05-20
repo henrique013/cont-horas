@@ -1,0 +1,22 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "geerlingguy/ubuntu1604"
+
+  config.vm.hostname = File.basename(Dir.getwd) # current directory
+
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.synced_folder "../src", "/var/www/public"
+
+  config.vm.provider "virtualbox" do |vb|
+     vb.memory = "512"
+  end
+
+  config.vm.provision "shell", path: "./provisioners/setup.sh"
+  config.vm.provision "shell", path: "./provisioners/util.sh"
+  config.vm.provision "shell", path: "./provisioners/apache-php.sh"
+
+end
